@@ -14,8 +14,11 @@ blocks:
         - name: Install
           commands:
             - checkout
-            - sem-services start postgres 11
+            - sem-services start postgres
             - sem-version ruby 2.6.5
+            - cp .semaphore/database.yml config/database.yml
+            - 'bin/rails db:create'
+            - bin/rails test
             - cache restore
             - 'bundle install '
             - cache store
